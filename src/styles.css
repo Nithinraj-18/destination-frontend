@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  color:black;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+/* Responsive text */
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+}

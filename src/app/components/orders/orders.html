@@ -1,0 +1,144 @@
+<div class="orders-page">
+  <h2>Orders</h2>
+
+  <p *ngIf="orders.length === 0">No Orders Found</p>
+
+  <table class="order-table" *ngIf="orders.length > 0">
+    <thead>
+      <tr>
+        <th>S/No</th>
+        <th>Ordered Date</th>
+        <th>Status</th>
+        <th>Items</th>
+        <th>Person Name</th>
+        <th>Person Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ order.createdAt | date:'medium' }}</td>
+        <td [ngClass]="{
+          'pending-status': order.status === 'PENDING',
+          'completed-status': order.status === 'COMPLETED'
+        }">
+
+          {{ order.status }}
+
+        </td>
+
+        <td>
+          <button (click)="openItems(order)">View</button>
+        </td>
+
+        <td>{{ order.userDetails?.name }}</td>
+
+        <td>
+          <button (click)="openUser(order)">View</button>
+        </td>
+
+        <td>
+          <div class="btn-group">
+
+            <button class="delivery-btn" (click)="OpenDelivery(order)">
+              Delivered
+            </button>
+
+            <button class="delete-btn" (click)="deleteOrder(order.orderId)">
+              Delete
+            </button>
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 🔥 ITEMS POPUP -->
+  <div class="modal" *ngIf="showItemsModal">
+    <div class="modal-content">
+
+      <h3 style="color:rgb(226, 10, 10);">Order Items</h3>
+
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>S/No</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of selectedItems; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.productName }}</td>
+            <td>₹ {{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹ {{ item.totalPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="subtotal">
+        Subtotal: ₹ {{ getSubtotal() }}
+      </div>
+
+      <div class="close-btn-container">
+        <button (click)="closeItems()" class="close-btn">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔥 USER POPUP -->
+  <div class="modal" *ngIf="showUserModal">
+    <div class="modal-content">
+
+      <h3 style="color:rgb(226, 10, 10);">User Details</h3>
+
+      <p><b>Name:</b> {{ selectedUser?.name }}</p>
+      <p><b>Email:</b> {{ selectedUser?.email }}</p>
+      <p><b>Phone:</b> {{ selectedUser?.mobileNumber }}</p>
+      <p class="user-info">
+        <span class="label">Address:</span>
+        <span class="text">{{ selectedUser?.address }}</span>
+      </p>
+      <p><b>Pincode:</b> {{ selectedUser?.pincode }}</p>
+      <p><b>State:</b> {{ selectedUser?.state }}</p>
+      <p><b>District:</b> {{ selectedUser?.district }}</p>
+      <p><b>Taluk:</b> {{ selectedUser?.taluk }}</p>
+
+      <div class="close-btn-container">
+        <button (click)="closeUser()" class="close-btn">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay-bg" *ngIf="delavaryPopup">
+    <div class="popup">
+      <h3>Confirm Delivery</h3>
+      <p>Are you sure you want to mark this order as delivered?</p>
+      <div class="btn-group-delivery">
+        <button class="submit-btn" (click)="confirmDelivery()">
+          Yes
+        </button>
+        <button class="cancel-btn" (click)="closeDeliveryPopup()">
+          No
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔥 TOAST MESSAGE (BOTTOM CENTER) -->
+    <div *ngIf="showMsg" class="toast">
+      {{ message }}
+    </div>
+
+  </div>

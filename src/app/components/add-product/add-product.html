@@ -1,0 +1,94 @@
+<div class="page">
+
+    <!-- 🔹 LEFT: ADD PRODUCT -->
+    <div class="card">
+
+        <h2>Add Product</h2>
+
+        <input [(ngModel)]="product.name" placeholder="Product Name" />
+        <input [(ngModel)]="product.description" placeholder="Description" />
+        <input [(ngModel)]="product.price" type="number" placeholder="Price" />
+        <input [(ngModel)]="product.category" placeholder="Category" />
+
+        <!-- ✅ FIXED IMAGE INPUT -->
+        <input type="file" (change)="onFileSelected($event)" #fileInput />
+
+        <!-- ✅ IMAGE PREVIEW -->
+        <img *ngIf="previewUrl" [src]="previewUrl" width="100" style="margin-top:10px;" />
+
+
+
+        <div class="btn-group">
+            <button (click)="submit()">Submit</button>
+            <button (click)="clearForm()">Clear</button>
+        </div>
+
+        <div *ngIf="message" class="msg" [class.success]="isSuccess" [class.error]="!isSuccess">
+            {{ message }}
+        </div>
+
+    </div>
+
+    <!-- 🔹 RIGHT: PRODUCT TABLE -->
+    <div class="table-card">
+
+        <h2>Products List</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let p of products">
+
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.category }}</td>
+
+                        <td>
+                            <div class="action-btns">
+                                <button class="update-btn" (click)="openEdit(p)">Update</button>
+                                <button class="delete-btn" (click)="deleteProduct(p.id)">Delete</button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔥 UPDATE POPUP -->
+<div *ngIf="showPopup" class="overlay">
+
+    <div class="popup">
+
+        <h3>Update Product</h3>
+
+        <input [(ngModel)]="editProduct.name" placeholder="Product Name" />
+        <input [(ngModel)]="editProduct.description" placeholder="Description" />
+        <input [(ngModel)]="editProduct.price" type="number" placeholder="Price" />
+        <input [(ngModel)]="editProduct.category" placeholder="Category" />
+
+        <input type="file" (change)="onUpdateFileSelected($event)" />
+
+        <div class="btn-group">
+            <button (click)="updateProduct()">Update</button>
+            <button (click)="closePopup()">Cancel</button>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+<!-- 🔥 NAVBAR (HIDE AFTER LOGIN PAGE) -->
+@if (showNavbar) {
+
+<nav class="navbar">
+
+  <div class="logo">Destination</div>
+
+  <div class="right">
+    <button class="login-btn" (click)="openLogin()">Login</button>
+  </div>
+</nav>
+
+}
+
+<!-- LOGIN POPUP -->
+@if (showLogin) {
+<div class="overlay" (click)="closeLogin()">
+
+  <div (click)="$event.stopPropagation()">
+    <app-login-popup (loginResult)="handleLoginResult($event)" (forgotResult)="handleForgotResult($event)"
+      (close)="closeLogin()">
+    </app-login-popup>
+  </div>
+
+</div>
+}
+
+<!-- 🔥 GLOBAL TOAST -->
+@if (message) {
+<div class="toast" [class.error]="isError" [class.success]="!isError">
+  {{ message }}
+</div>
+}

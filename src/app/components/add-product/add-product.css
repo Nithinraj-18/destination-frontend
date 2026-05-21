@@ -1,0 +1,189 @@
+/* PAGE */
+.page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    background: #f1f5f9;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* LEFT CARD */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    flex: 0 0 350px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* INPUT */
+.card input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* BUTTON */
+.btn-group button {
+    flex: 1;
+    height: 42px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-group button:first-child {
+    background: #28a745;
+}
+
+.btn-group button:last-child {
+    background: #6c757d;
+}
+
+/* MESSAGE */
+.msg {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+/* RIGHT TABLE */
+.table-card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper {
+    max-height: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+
+    white-space: nowrap;
+    /* 🔥 no line break */
+    overflow: hidden;
+    /* hide extra text */
+    text-overflow: ellipsis;
+}
+
+th {
+    background: #1e293b;
+    color: white;
+}
+
+/* BUTTONS */
+.update-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    margin-right: 5px;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+}
+
+/* POPUP */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.popup {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+
+    width: 350px;
+    /* ✅ match card */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.popup input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+}
+
+.action-btns {
+    display: flex;
+    gap: 30px;
+    /* 🔥 clean space between buttons */
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .page {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .table-card {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table-wrapper {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+}

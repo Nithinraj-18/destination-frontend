@@ -1,0 +1,40 @@
+<div class="login-container">
+
+  <!-- 🔐 LOGIN MODE -->
+  @if (!isForgotMode) {
+
+  <h2>Login</h2>
+
+  <input [(ngModel)]="email" placeholder="Email" type="email" />
+  <input [(ngModel)]="password" type="password" placeholder="Password" />
+
+  <!-- Forgot password link -->
+  <div class="forgot" (click)="openForgot()">
+    Forgot Password?
+  </div>
+
+  <div class="button-group">
+    <button class="login-btn" (click)="login()" [disabled]="isLoading">
+      @if (!isLoading) { Login } @else { Logging in... }
+    </button>
+
+    <button class="close-btn" (click)="closePopup()">Close</button>
+  </div>
+
+  }
+
+  <!-- 🔁 FORGOT PASSWORD MODE -->
+  @if (isForgotMode) {
+
+  <h2>Forgot Password</h2>
+
+  <input [(ngModel)]="email" placeholder="Enter your email" type="email" />
+
+  <div class="button-group">
+    <button class="login-btn" (click)="submitForgot()">Submit</button>
+    <button class="close-btn" (click)="backToLogin()">Back</button>
+  </div>
+
+  }
+
+</div>

@@ -1,0 +1,120 @@
+<div class="page">
+
+    <!-- 🔹 LEFT: CREATE LOGIN -->
+    <div class="card">
+
+        <h2>Create Login</h2>
+
+        <input [(ngModel)]="username" placeholder="username" />
+
+        <input [(ngModel)]="email" (input)="validateEmail()" type="email" placeholder="Email (abc@gmail.com)" />
+
+        <div *ngIf="emailError" class="form-error">
+            Enter valid email
+        </div>
+
+        <input [(ngModel)]="password" type="password" placeholder="Password" />
+
+        <div class="btn-group">
+            <button (click)="submit()">Submit</button>
+            <button (click)="clearForm()">Clear</button>
+        </div>
+
+        <div *ngIf="message" class="msg" [class.success]="isSuccess" [class.error]="!isSuccess">
+
+            {{ message }}
+
+        </div>
+
+    </div>
+
+    <!-- 🔹 RIGHT SIDE -->
+    <div class="tables-section">
+
+        <!-- ================= USERS TABLE ================= -->
+        <div class="table-card">
+
+            <h2>Users List</h2>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let user of users">
+
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.role }}</td>
+
+                            <td>
+
+                                <button class="delete-btn" (click)="deleteUser(user.id, user.email)"
+                                    [disabled]="user.email === 'destination56662025@gmail.com'">
+
+                                    Delete
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div *ngIf="deleteMessage" class="msg" [class.success]="deleteSuccess" [class.error]="!deleteSuccess">
+
+                {{ deleteMessage }}
+
+            </div>
+
+        </div>
+
+        <!-- ================= MONTHLY REVENUE TABLE ================= -->
+        <div class="table-card">
+
+            <h2>Monthly Revenue</h2>
+
+            <div class="table-wrapper-revenue">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Year</th>
+                            <th>Total Revenue</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let revenue of monthlyRevenues"> 
+                            <td>{{ revenue.month }}</td> 
+                            <td>{{ revenue.year }}</td> 
+                            <td>₹ {{ revenue.revenue }}</td> 
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

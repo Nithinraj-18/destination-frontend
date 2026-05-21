@@ -1,0 +1,250 @@
+<div class="cart-page" style="background: #5c3931;">
+  <h2><u>Shopping Cart</u></h2>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+  <!-- 🔹 DESKTOP TABLE -->
+  <div class="table-container" *ngIf="cartItems.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>S/No</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of cartItems; let i = index">
+          <td>{{ i + 1 }}</td>
+
+          <!-- ✅ ONLY NAME -->
+          <td>{{ item.name }}</td>
+
+          <td>₹ {{ item.price }}</td>
+
+          <td>
+            <button (click)="decreaseQty(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQty(item)">+</button>
+          </td>
+
+          <td>₹ {{ getItemTotal(item) }}</td>
+
+          <td>
+            <button class="delete-btn" (click)="removeItem(item.id)">🗑</button>
+          </td>
+        </tr>
+
+        <!-- SUBTOTAL -->
+        <tr class="subtotal-row">
+          <td colspan="4" class="right"><strong>Subtotal:</strong></td>
+          <td><strong>₹ {{ getSubtotal() }}</strong></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🔹 MOBILE CARD VIEW -->
+  <div class="mobile-cart" *ngIf="cartItems.length > 0">
+
+    <div class="mobile-card" *ngFor="let item of cartItems">
+
+      <!-- ✅ ONLY NAME -->
+      <h3>{{ item.name }}</h3>
+
+      <p><strong>Price:</strong> ₹ {{ item.price }}</p>
+
+      <div class="qty">
+        <button (click)="decreaseQty(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQty(item)">+</button>
+      </div>
+
+      <p><strong>Total:</strong> ₹ {{ getItemTotal(item) }}</p>
+
+      <button class="delete-btn" (click)="removeItem(item.id)">Remove</button>
+
+    </div>
+
+    <!-- SUBTOTAL -->
+    <div class="mobile-subtotal">
+      <strong>Subtotal: ₹ {{ getSubtotal() }}</strong>
+    </div>
+
+  </div>
+
+  <!-- 🔹 EMPTY -->
+  <div *ngIf="cartItems.length === 0">
+    <p>Your cart is empty</p>
+  </div>
+
+  <!-- 🔹 FOOTER -->
+  <div class="cart-footer" *ngIf="cartItems.length > 0">
+    <div class="left-buttons">
+      <button class="order-btn" (click)="openOrderPopup()">Order</button>
+    </div>
+
+    <div class="right-buttons">
+      <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+      <button class="home-btn" (click)="goHome()">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- 🔥 ORDER POPUP -->
+  <div class="popup-overlay" *ngIf="showOrderPopup">
+
+    <div class="popup">
+
+      <h3>Enter Delivery Details</h3>
+
+      <div class="error-msg" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <input type="text" placeholder="Name" [(ngModel)]="order.name">
+      <input type="email" placeholder="Email" [(ngModel)]="order.email">
+      <input type="text" maxlength="10" [(ngModel)]="order.mobileNumber" (input)="allowOnlyNumbers($event)"
+        placeholder="Enter Mobile Number" />
+      <input type="text" placeholder="Address" [(ngModel)]="order.address">
+      <input type="text" placeholder="Pincode" [(ngModel)]="order.pincode">
+      <input type="text" placeholder="State" [(ngModel)]="order.state">
+      <input type="text" placeholder="District" [(ngModel)]="order.district">
+      <input type="text" placeholder="Taluk" [(ngModel)]="order.taluk">
+
+      <div class="popup-actions">
+        <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>
+        <button class="cancel-btn" (click)="closeOrderPopup()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 🔥 CONFIRMATION POPUP -->
+  <div class="popup-overlay" *ngIf="showConfirmPopup">
+
+    <div class="popup small">
+
+      <h3>Please confirm: Do you want to place this order with the provided details?</h3>
+
+      <div class="popup-actions">
+        <button class="confirm-btn" (click)="placeOrder()" [disabled]="isPlacingOrder">
+          {{ isPlacingOrder ? 'Placing...' : 'Yes' }}
+        </button>
+        <button class="cancel-btn" (click)="showConfirmPopup = false">No</button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- 🔥 FOOTER -->
+  <div class="custom-footer">
+
+    <div class="footer-item" (click)="showAboutPopup = true">
+      About Us
+    </div>
+
+    <div class="footer-item note-highlight" (click)="showNotePopup = true">
+
+      ⚠ Important Note ⚠
+
+    </div>
+
+    <div class="footer-item">
+
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=destination56662025@gmail.com" target="_blank"
+        class="email-link">
+        <i class="fas fa-envelope"></i>
+
+        Contact : destination56662025@gmail.com
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- 🔥 ABOUT POPUP -->
+  <div class="popup-overlay" *ngIf="showAboutPopup">
+
+    <div class="popup about-popup">
+
+      <h3><u>About Us</u></h3>
+
+      <p>
+        Our sugar-free chocolates are very famous and loved by many customers.
+        We focus on quality, taste, and healthy ingredients to provide the best experience.
+      </p>
+
+      <p>
+        We already have 2000+ happy customers who trust and support us.
+        Their satisfaction motivates us to continue delivering delicious chocolates every day.
+      </p>
+
+      <p>
+        Thank you for supporting our journey ❤️
+      </p>
+
+      <!-- ✅ INSTAGRAM SECTION -->
+      <div class="instagram-section">
+
+        <p>
+          For more information and to check customer reviews,
+          please visit our Instagram page.
+        </p>
+
+        <a href="https://www.instagram.com/destination_5666" target="_blank" class="instagram-link">
+          <i class="fab fa-instagram"></i>
+          Visit Instagram Page
+        </a>
+
+      </div>
+
+      <div class="popup-actions">
+        <button class="confirm-btn-popup" (click)="showAboutPopup = false">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 🔥 NOTE POPUP -->
+  <div class="popup-overlay" *ngIf="showNotePopup">
+
+    <div class="popup about-popup">
+
+      <h3 style="color: rgb(235, 184, 0); font-size: 25px;">Important Note</h3>
+
+      <p>
+        Please enter valid details while ordering.
+      </p>
+
+      <p>
+        Please do not place orders unnecessarily or for fun.
+      </p>
+
+      <p>
+        The address you provide during ordering will be considered final.
+        After placing the order, you cannot update the order details.
+      </p>
+
+      <p>
+        Kindly verify all details carefully before confirming your order.
+      </p>
+
+      <div class="popup-actions">
+        <button class="confirm-btn-popup" (click)="showNotePopup = false">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

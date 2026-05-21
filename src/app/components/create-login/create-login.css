@@ -1,0 +1,224 @@
+/* FULL SCREEN PAGE */
+.page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  gap: 30px;
+
+
+  background: #f1f5f9;
+  padding: 20px;
+  box-sizing: border-box;
+  /* important for mobile spacing */
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  flex: 0 0 350px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* INPUTS */
+.card input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+.btn-group button {
+  flex: 1;
+  height: 42px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* SUBMIT */
+.btn-group button:first-child {
+  background: #28a745;
+}
+
+/* CLEAR */
+.btn-group button:last-child {
+  background: #6c757d;
+}
+
+/* MESSAGE */
+.msg {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+@media (max-width: 480px) {
+
+  .card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    /* stack buttons on mobile */
+  }
+
+  .btn-group button {
+    width: 100%;
+  }
+}
+
+.form-error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* PAGE CONTAINER */
+.page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  gap: 30px;
+
+  padding: 20px;
+  /* ✅ responsive padding */
+
+  background: #f1f5f9;
+  box-sizing: border-box;
+}
+
+/* LEFT CARD */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+
+  flex: 0 0 350px;
+  /* ✅ instead of fixed width */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* RIGHT TABLE */
+.table-card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 0;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+/* HEADER */
+th {
+  background: #1e293b;
+  color: white;
+}
+
+/* BUTTON */
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+}
+
+.delete-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+  .page {
+    flex-direction: column;
+    /* 🔥 stack vertically */
+    padding: 15px;
+  }
+
+  .card {
+    flex: 1;
+    width: 100%;
+  }
+
+  .table-card {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+}
+
+
+.page {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.tables-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.table-wrapper-revenue {
+    max-height: 120px;
+    overflow-y: auto;
+}

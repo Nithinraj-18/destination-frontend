@@ -1,0 +1,90 @@
+<!-- 🔝 TOP NAVBAR -->
+<div class="top-navbar">
+  <div class="menu-icon" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="logo"></div>
+
+  <!-- 🔥 LOGOUT BUTTON -->
+  <button class="logout-btn" (click)="openLogoutPopup()">
+    Logout
+  </button>
+</div>
+
+
+<div class="dashboard-bg"  [class.no-scroll]="menuOpen">
+
+
+
+  <!-- 🔽 MAIN LAYOUT -->
+  <div class="layout">
+
+    <!-- 📌 SIDEBAR -->
+    <div class="sidebar" [class.open]="menuOpen">
+      <ul>
+
+        <li>
+          <button routerLink="/dashboard/update-password" (click)="closeMenu()">
+            Update Password
+          </button>
+        </li>
+
+        <li *ngIf="isCreateLoginAllowed">
+          <button routerLink="/dashboard/create-login" (click)="closeMenu()">
+            Create Logins
+          </button>
+        </li>
+
+        <li>
+          <button routerLink="/dashboard/add-product" (click)="closeMenu()">
+            Add Products
+          </button>
+        </li>
+
+        <li>
+          <button routerLink="/dashboard/orders" (click)="closeMenu()">
+            View Orders
+          </button>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- 📄 CONTENT -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+  <div class="overlay-bg" *ngIf="showLogoutPopup">
+
+    <div class="popup">
+
+      <h3>Confirm Logout</h3>
+
+      <p>Are you sure you want to logout?</p>
+
+      <div class="btn-group">
+
+        <button class="submit-btn" (click)="confirmLogout()">
+          Yes
+        </button>
+
+        <button class="cancel-btn" (click)="closeLogoutPopup()">
+          No
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="normal-message" *ngIf="message">
+    {{ message }}
+  </div>
+
+
+</div>

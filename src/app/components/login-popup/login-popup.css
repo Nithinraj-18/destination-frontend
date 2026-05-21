@@ -1,0 +1,122 @@
+/* ===================== OVERLAY ===================== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: overlayFade 0.3s ease;
+}
+
+/* ===================== POPUP ===================== */
+
+.login-container {
+  background: white;
+  padding: 30px;
+  width: 350px;
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+  animation: popupZoom 0.3s ease;
+}
+
+/* ===================== INPUT ===================== */
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ===================== BUTTON GROUP ===================== */
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* ✅ LOGIN BUTTON (GREEN) */
+.login-btn {
+  flex: 1;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: #218838;
+}
+
+.login-btn:active {
+  transform: scale(0.96);
+}
+
+/* ❌ CLOSE BUTTON (RED) */
+.close-btn {
+  flex: 1;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #c82333;
+}
+
+.close-btn:active {
+  transform: scale(0.96);
+}
+
+/* ===================== ANIMATIONS ===================== */
+
+/* Overlay fade */
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Popup zoom animation (🔥 Amazon style) */
+@keyframes popupZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* forgot link */
+.forgot {
+  text-align: right;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
