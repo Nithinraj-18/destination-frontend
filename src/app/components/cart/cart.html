@@ -147,73 +147,16 @@
   <!-- 🔥 FOOTER -->
   <div class="custom-footer">
 
-    <div class="footer-item" (click)="showAboutPopup = true">
-      About Us
-    </div>
-
     <div class="footer-item note-highlight" (click)="showNotePopup = true">
 
       ⚠ Important Note ⚠
 
     </div>
 
-    <div class="footer-item">
-
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=destination56662025@gmail.com" target="_blank"
-        class="email-link">
-        <i class="fas fa-envelope"></i>
-
-        Contact : destination56662025@gmail.com
-      </a>
-
-    </div>
-
   </div>
 
   <!-- 🔥 ABOUT POPUP -->
-  <div class="popup-overlay" *ngIf="showAboutPopup">
 
-    <div class="popup about-popup">
-
-      <h3><u>About Us</u></h3>
-
-      <p>
-        Our sugar-free chocolates are very famous and loved by many customers.
-        We focus on quality, taste, and healthy ingredients to provide the best experience.
-      </p>
-
-      <p>
-        We already have 2000+ happy customers who trust and support us.
-        Their satisfaction motivates us to continue delivering delicious chocolates every day.
-      </p>
-
-      <p>
-        Thank you for supporting our journey ❤️
-      </p>
-
-      <!-- ✅ INSTAGRAM SECTION -->
-      <div class="instagram-section">
-
-        <p>
-          For more information and to check customer reviews,
-          please visit our Instagram page.
-        </p>
-
-        <a href="https://www.instagram.com/destination_5666" target="_blank" class="instagram-link">
-          <i class="fab fa-instagram"></i>
-          Visit Instagram Page
-        </a>
-
-      </div>
-
-      <div class="popup-actions">
-        <button class="confirm-btn-popup" (click)="showAboutPopup = false">
-          Close
-        </button>
-      </div>
-
-    </div>
-  </div>
 
   <!-- 🔥 NOTE POPUP -->
   <div class="popup-overlay" *ngIf="showNotePopup">

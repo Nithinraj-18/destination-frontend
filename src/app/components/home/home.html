@@ -1,7 +1,11 @@
-<div style="background: #5c3931;">
-  <button routerLink="/cart" class="btn cart-btn" #cartBtn>
-    🛒 Go to Cart
-  </button>
+<div class="page-container" style="background: #5c3931;">
+  <div class="cart-btn-wrapper">
+
+    <button routerLink="/cart" class="btn cart-btn">
+      🛒 Go to Cart
+    </button>
+
+  </div>
 
   <div class="grid" *ngIf="products.length > 0">
 
@@ -28,7 +32,7 @@
 
     <div class="popup-box">
 
-      <h2 >{{ selectedProduct?.name }}</h2>
+      <h2>{{ selectedProduct?.name }}</h2>
 
       <img [src]="selectedProduct?.imageUrl" alt="product" class="popup-img" />
 
@@ -49,4 +53,122 @@
     </div>
 
   </div>
+</div>
+
+
+<!-- ✅ FOOTER -->
+<footer class="footer">
+
+  <div class="footer-content">
+
+    <!-- LOGO -->
+    <div class="footer-logo">
+      🍫 Destination Chocolate
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="footer-links">
+
+      <!-- ABOUT -->
+      <div class="footer-btn about-btn" (click)="showAboutPopup = true">
+
+        <i class="fas fa-info-circle"></i>
+
+        About Us
+
+      </div>
+
+      <!-- CONTACT -->
+      <div class="footer-btn contact-btn" (click)="showContactPopup = true">
+
+        <i class="fas fa-phone-alt"></i>
+
+        Contact Us
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- ✅ ABOUT POPUP -->
+<div class="popup-overlay" *ngIf="showAboutPopup">
+
+  <div class="footer-popup">
+
+    <h2>About Us</h2>
+
+    <p>
+      Our sugar-free chocolates are very famous and loved by many customers.
+      We focus on quality, taste, and healthy ingredients to provide the best experience.
+    </p>
+
+    <p>
+      We already have 2000+ happy customers who trust and support us.
+      Their satisfaction motivates us to continue delivering delicious chocolates every day.
+    </p>
+
+    <p>
+      Thank you for supporting our journey ❤️
+    </p>
+
+    <button class="close-popup-btn" (click)="showAboutPopup = false">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ✅ CONTACT POPUP -->
+<div class="popup-overlay" *ngIf="showContactPopup">
+
+  <div class="footer-popup">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-links">
+
+      <!-- INSTAGRAM -->
+      <a href="https://www.instagram.com/destination_5666" target="_blank" class="contact-card instagram">
+
+        <i class="fab fa-instagram"></i>
+
+        Instagram
+
+      </a>
+
+      <!-- WHATSAPP -->
+      <a href="https://wa.me/9964708442" target="_blank" class="contact-card whatsapp">
+
+        <i class="fab fa-whatsapp"></i>
+
+        WhatsApp
+
+      </a>
+
+      <!-- EMAIL -->
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=destination56662025@gmail.com" target="_blank"
+        class="contact-card email">
+
+        <i class="fas fa-envelope"></i>
+
+        Email Us
+
+      </a>
+
+    </div>
+
+    <button class="close-popup-btn" (click)="showContactPopup = false">
+
+      Close
+
+    </button>
+
+  </div>
+
 </div>

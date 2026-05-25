@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   products: any[] = [];
   showPopup = false;
   selectedProduct: any = null;
+  showAboutPopup = false;
+  showContactPopup = false;
 
   constructor(
     private api: ApiService,
