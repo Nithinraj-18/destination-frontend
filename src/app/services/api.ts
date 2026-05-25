@@ -6,10 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
+  // local URLs
+
   // private adminUrl = 'http://localhost:8082/api/admin';
   // private productUrl = 'http://localhost:8082/api/products';
   // private orderUrl = 'http://localhost:8082/api/orders';
   // private adminOrderUrl = 'http://localhost:8082/api/admin/orders';
+
+  // production URLs
 
   private adminUrl = 'https://destination-backend-hr7f.onrender.com/api/admin';
   private productUrl = 'https://destination-backend-hr7f.onrender.com/api/products';
