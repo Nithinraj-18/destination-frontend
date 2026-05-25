@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   selectedProduct: any = null;
   showAboutPopup = false;
   showContactPopup = false;
+  isLoading = true;
 
   constructor(
     private api: ApiService,
@@ -40,23 +41,42 @@ export class HomeComponent implements OnInit {
     this.selectedProduct = null;
   }
   loadProducts(): void {
-    this.api.getAllProducts().subscribe({
-      next: (res: any) => {
 
-        console.log('🔥 API RESPONSE:', res);
+    const retryInterval = setInterval(() => {
 
-        // ✅ FIX: Correct response mapping
-        this.products = res?.data ?? res ?? [];
+      console.log('⏳ Trying to wake backend server...');
 
-        console.log('🔥 FINAL PRODUCTS:', this.products);
+      this.api.getAllProducts().subscribe({
 
-        // ✅ FIX: Force UI update (important for your issue)
-        this.cd.detectChanges();
-      },
-      error: (err) => {
-        console.error('❌ API ERROR:', err);
-      }
-    });
+        next: (res: any) => {
+
+          console.log('✅ API RESPONSE:', res);
+
+          this.products = res?.data ?? res ?? [];
+
+          console.log('✅ PRODUCTS LOADED:', this.products);
+
+          // ✅ hide loading screen
+          this.isLoading = false;
+
+          // ✅ stop retrying
+          clearInterval(retryInterval);
+
+          // ✅ refresh UI
+          this.cd.detectChanges();
+
+        },
+
+        error: (err) => {
+
+          console.log('❌ Backend still sleeping... retrying');
+
+        }
+
+      });
+
+    }, 5000);
+
   }
 
   message = '';
@@ -128,3 +148,4 @@ export class HomeComponent implements OnInit {
     }, 900);
   }
 }
+

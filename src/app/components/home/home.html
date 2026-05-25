@@ -1,4 +1,18 @@
-<div class="page-container" style="background: #5c3931;">
+<!-- ✅ FULL SCREEN LOADER -->
+<div class="fullscreen-loader" *ngIf="isLoading">
+
+  <div class="loader-box">
+
+    <div class="spinner"></div>
+
+    <h2>Destination Chocolate</h2>
+
+    <p> Please wait a moment... cart is loading 🛒</p>
+
+  </div>
+
+</div>
+<div class="page-container" style="background: #5c3931;" *ngIf="!isLoading">
   <div class="cart-btn-wrapper">
 
     <button routerLink="/cart" class="btn cart-btn">
