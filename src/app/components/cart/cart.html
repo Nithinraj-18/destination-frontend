@@ -109,13 +109,29 @@
 
       <input type="text" placeholder="Name" [(ngModel)]="order.name">
       <input type="email" placeholder="Email" [(ngModel)]="order.email">
-      <input type="text" maxlength="10" [(ngModel)]="order.mobileNumber" (input)="allowOnlyNumbers($event)"
-        placeholder="Enter Mobile Number" />
+      <input type="text" maxlength="10" [(ngModel)]="order.mobileNumber" (keypress)="allowOnlyNumbers($event)"
+        (input)="validateMobile($event)" placeholder="Enter Mobile Number" />
       <input type="text" placeholder="Address" [(ngModel)]="order.address">
-      <input type="text" placeholder="Pincode" [(ngModel)]="order.pincode">
-      <input type="text" placeholder="State" [(ngModel)]="order.state">
-      <input type="text" placeholder="District" [(ngModel)]="order.district">
-      <input type="text" placeholder="Taluk" [(ngModel)]="order.taluk">
+      <input type="text" placeholder="Pincode" [(ngModel)]="order.pincode" (keypress)="allowOnlyNumbers($event)"
+        (input)="validatePincode($event)">
+
+      <select [(ngModel)]="order.state" name="state">
+        <option value="" disabled>Select State</option>
+        <option value="Karnataka">Karnataka</option>
+      </select>
+
+      <select [(ngModel)]="order.district" name="district">
+        <option value="" disabled>Select District</option>
+         <option value="Davanagere">Davanagere</option>
+      </select>
+
+      <select [(ngModel)]="order.taluk" name="taluk">
+        <option value="" disabled>Select Taluk</option>
+         <option value="Davanagere">Davanagere</option>
+          <option value="Davanagere">Harihar</option>
+           <option value="Davanagere">Channagiri</option>
+            <option value="Davanagere">Jagalur</option>
+      </select>
 
       <div class="popup-actions">
         <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>

@@ -187,3 +187,21 @@ th {
     }
 
 }
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+}

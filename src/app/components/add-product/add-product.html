@@ -82,6 +82,21 @@
         <input [(ngModel)]="editProduct.price" type="number" placeholder="Price" />
         <input [(ngModel)]="editProduct.category" placeholder="Category" />
 
+
+        <div class="radio-group">
+            <span>Out Of Stock:</span>
+
+            <label>
+                <input type="radio" name="outOfStock" [value]="false" [(ngModel)]="editProduct.outOfStock">
+                No
+            </label>
+
+            <label>
+                <input type="radio" name="outOfStock" [value]="true" [(ngModel)]="editProduct.outOfStock">
+                Yes
+            </label>
+        </div>
+
         <input type="file" (change)="onUpdateFileSelected($event)" />
 
         <div class="btn-group">

@@ -121,28 +121,30 @@ body {
 /* BUTTONS */
 .btn-group {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  margin-top: 20px;
 }
 
 .submit-btn {
-  flex: 1;
-  height: 40px;
+  color: white;
   border: none;
   background: #28a745;
-  color: white;
   border-radius: 6px;
+  width: 150px;
+  height: 42px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .cancel-btn {
-  flex: 1;
-  height: 40px;
+  color: white;
   border: none;
   background: #dc3545;
-  color: white;
   border-radius: 6px;
+  width: 150px;
+  height: 42px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 /* TOAST */

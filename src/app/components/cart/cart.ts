@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   isPlacingOrder = false;
+  
 
   order: any = {
     name: '',
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
     pincode: '',
     state: '',
     district: '',
-    taluk: ''
+    taluk: '',
   };
 
   constructor(
@@ -186,8 +187,25 @@ export class CartComponent implements OnInit {
     });
   }
 
-  allowOnlyNumbers(event: any): void {
-    event.target.value = event.target.value.replace(/[^0-9]/g, '');
+  allowOnlyNumbers(event: KeyboardEvent): void {
+    const charCode = event.which ? event.which : event.keyCode;
+
+    // Allow only numbers 0-9
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
+  validateMobile(event: any): void {
+    event.target.value = event.target.value
+      .replace(/\D/g, '') // remove non-digits
+      .slice(0, 10);      // max 10 digits
+  }
+
+  validatePincode(event: any): void {
+    event.target.value = event.target.value
+      .replace(/\D/g, '') // remove non-digits
+      .slice(0, 6);       // max 6 digits
   }
 
   allowOnlyText(event: any): void {

@@ -33,8 +33,16 @@
       <a class="details-link" (click)="openPopup(p)">
         Details
       </a>
-      <button class="btn add-btn" (click)="addToCart(p, productImg)">
-        Add to Cart
+
+
+      <!-- Out of Stock Message -->
+      <p *ngIf="p.outOfStock" class="out-stock-msg">
+        This product is currently out of stock.
+      </p>
+
+      <button class="btn add-btn" [disabled]="p.outOfStock" [class.disabled-btn]="p.outOfStock"
+        (click)="addToCart(p, productImg)">
+        {{ p.outOfStock ? 'Out of Stock' : 'Add to Cart' }}
       </button>
 
     </div>
@@ -76,7 +84,7 @@
   <div class="footer-content">
 
     <!-- LOGO -->
-    <div class="footer-logo" style = "text-align:center">
+    <div class="footer-logo" style="text-align:center">
       🍫 Destination The Healthy Snacks
     </div>
 

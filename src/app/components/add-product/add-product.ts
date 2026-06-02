@@ -20,7 +20,8 @@ export class AddProduct implements OnInit {
     description: '',
     price: '',
     imageUrl: '', // keep as is (no change)
-    category: ''
+    category: '',
+    outOfStock: false
   };
 
   // 🔹 TABLE DATA
@@ -43,7 +44,8 @@ export class AddProduct implements OnInit {
     description: '',
     price: '',
     imageUrl: '',
-    category: ''
+    category: '',
+    outOfStock: false
   };
 
   // ✅ CORRECT FILE VARIABLE
@@ -192,7 +194,8 @@ export class AddProduct implements OnInit {
       description: p.description,
       price: p.price,
       imageUrl: p.imageUrl,
-      category: p.category
+      category: p.category,
+      outOfStock: p.outOfStock
     };
 
     this.showPopup = true;
@@ -206,7 +209,9 @@ export class AddProduct implements OnInit {
     if (!this.editProduct.name ||
       !this.editProduct.description ||
       !this.editProduct.price ||
-      !this.editProduct.category) {
+      !this.editProduct.category ||
+      this.editProduct.outOfStock === null ||
+      this.editProduct.outOfStock === undefined) {
 
       this.setMessage("All fields required", false);
       return;
@@ -224,7 +229,8 @@ export class AddProduct implements OnInit {
       name: this.editProduct.name,
       description: this.editProduct.description,
       price: this.editProduct.price,
-      category: this.editProduct.category
+      category: this.editProduct.category,
+      outOfStock: this.editProduct.outOfStock
     };
 
     formData.append(
@@ -281,7 +287,8 @@ export class AddProduct implements OnInit {
       description: '',
       price: '',
       category: '',
-      imageUrl: '' // keep as is
+      imageUrl: '', // keep as is
+      outOfStock: false
     };
 
     this.selectedFile = null as any;
@@ -300,7 +307,8 @@ export class AddProduct implements OnInit {
       description: '',
       price: '',
       imageUrl: '',
-      category: ''
+      category: '',
+      outOfStock: false
     };
   }
 
