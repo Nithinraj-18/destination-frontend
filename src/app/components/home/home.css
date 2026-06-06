@@ -313,9 +313,8 @@ img {
 /* ✅ FOOTER */
 .footer {
   background: #111827;
-  padding: 25px 55px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-
+  padding: 25px 21px;
+  border-top: -90px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
@@ -537,18 +536,22 @@ img {
 
   .footer-logo {
     font-size: 18px;
+    margin-top: 0px;
   }
 
   .footer-links {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    /* Left and Right */
+    justify-content: space-between;
     width: 100%;
+    gap: 10px;
   }
 
   .footer-btn {
-    width: 90%;
+    width: 48%;
     justify-content: center;
   }
-
 }
 
 /* =========================
