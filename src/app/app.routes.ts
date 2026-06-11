@@ -11,13 +11,14 @@ import { ForgotPassword } from './components/forgot-password/forgot-password';
 import { Orders } from './components/orders/orders';
 import { createLoginAdminOnlyGuard } from './guards/create-login-admin-only-guard';
 import { adminGuard } from './guards/admin-guard';
+import { InfoPage } from './components/info-page/info-page';
 
 export const routes: Routes = [
 
   // 🏠 HOME
   {
     path: '',
-    component: HomeComponent
+    component: InfoPage
   },
 
   // 🏠 HOME PAGE

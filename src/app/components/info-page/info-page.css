@@ -1,0 +1,325 @@
+
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    min-height: 100vh;
+    background-image: url("/assets/nuts2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: bgSlider 15s infinite;
+    position: relative;
+}
+
+@keyframes bgSlider {
+    0% {
+        background-image: url("/assets/nuts2.jpg");
+    }
+
+    33% {
+        background-image: url("/assets/nuts3.jpg");
+    }
+
+    66% {
+        background-image: url("/assets/nuts4.jpg");
+    }
+    100% {
+        background-image: url("/assets/nuts8.jpg");
+    }
+
+    120% {
+        background-image: url("/assets/nuts9.jpg");
+    }
+}
+
+.overlay {
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, .50);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+    font-size: 60px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* =========================
+   ANIMATED TEXT
+========================= */
+
+.animated-text {
+    max-width: 850px;
+    font-size: 22px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+    animation: fadeInUp 2s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.order-btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+    color: #0f172a;
+    transition: 0.4s;
+}
+
+.order-btn:hover {
+    transform: scale(1.08);
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about-section {
+    padding: 100px 20px;
+    background: #f8fafc;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+
+.about-card {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.10);
+}
+
+.about-card p {
+    line-height: 1.9;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-bottom: 0;
+}
+
+.footer h3 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.footer p {
+    color: white;
+    margin: 8px 0;
+}
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.social-icons a {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    font-size: 28px;
+
+    transition: all .3s ease;
+}
+
+.social-icons a:hover {
+    transform: translateY(-8px) scale(1.1);
+}
+
+/* YouTube */
+.social-icons a:nth-child(1) i {
+    color: #ff0000;
+}
+
+/* Instagram */
+.social-icons a:nth-child(2) i {
+    color: #e4405f;
+}
+
+/* WhatsApp */
+.social-icons a:nth-child(3) i {
+    color: #25d366;
+}
+
+/* Email */
+.social-icons a:nth-child(4) i {
+    color: #4285f4;
+}
+
+.footer-text,
+.copyright {
+    color: white;
+    margin-top: 15px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+    .title {
+        font-size: 40px;
+    }
+
+    .animated-text {
+        font-size: 18px;
+        max-width: 95%;
+    }
+
+    .about-section h2 {
+        font-size: 32px;
+    }
+
+    .about-card {
+        padding: 25px;
+    }
+
+    .social-icons a {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .title {
+        font-size: 30px;
+    }
+
+    .animated-text {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .order-btn {
+        width: 200px;
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .about-section {
+        padding: 60px 15px;
+    }
+
+    .about-section h2 {
+        font-size: 26px;
+    }
+
+    .about-card {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .about-card p {
+        font-size: 14px;
+    }
+
+    .footer h3 {
+        font-size: 22px;
+    }
+
+    .footer p {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        gap: 12px;
+    }
+
+    .social-icons a {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .copyright {
+        font-size: 12px;
+    }
+}

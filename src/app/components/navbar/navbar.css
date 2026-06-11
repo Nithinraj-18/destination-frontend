@@ -1,8 +1,10 @@
+/* ================= NAVBAR ================= */
+
 .navbar {
   width: 100%;
-  height: 60px;
-  background: #1e293b;
-  /* dark blue */
+  height: 70px;
+
+  background: #0f172a;
   color: white;
 
   display: flex;
@@ -10,59 +12,86 @@
   align-items: center;
 
   padding: 0 20px;
+  box-sizing: border-box;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  z-index: 1000;
 }
 
+/* LEFT SECTION */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
+/* MENU BUTTON */
+.menu-btn {
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  user-select: none;
+}
 
-/* Logo */
-/* 🔥 Professional Chocolate Brand Logo */
+.menu-btn:hover {
+  transform: scale(1.1);
+}
 
+/* LOGO */
 .logo {
   position: relative;
   display: inline-block;
-  text-align: center;
-  font-size: 30px;
+
+  font-size: 28px;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
 
   font-family: 'Poppins', sans-serif;
 
   background: linear-gradient(135deg, #eae0d3, #e5a566, #6f3e06);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   text-transform: uppercase;
+
   cursor: pointer;
-  transition: all 0.4s ease;
+
   animation: floatLogo 3s ease-in-out infinite;
 }
 
-/* Underline Animation */
 .logo::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 3px;
-  background: linear-gradient(to right, #D4A373, #FFF8F0);
-  border-radius: 10px;
-  transition: width 0.4s ease;
-}
+  bottom: -5px;
 
-/* Hover Effects */
-.logo:hover {
-  transform: scale(1.06);
-  filter: drop-shadow(0 0 10px rgba(212, 163, 115, 0.6));
+  width: 0;
+  height: 3px;
+
+  background: linear-gradient(to right, #D4A373, #FFF8F0);
+
+  border-radius: 10px;
+
+  transition: 0.4s;
 }
 
 .logo:hover::after {
   width: 100%;
 }
 
-/* Floating Animation */
+.logo:hover {
+  transform: scale(1.03);
+}
+
 @keyframes floatLogo {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 
   50% {
@@ -70,41 +99,83 @@
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
-/* Right section */
+/* RIGHT SECTION */
 .right {
   display: flex;
   align-items: center;
 }
 
-/* Login button */
+/* LOGIN BUTTON */
 .login-btn {
-  padding: 8px 16px;
-  background: #facc15;
-  /* yellow like amazon */
+  padding: 10px 20px;
+
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 25px;
+
+  background: #facc15;
+  color: #000;
+
+  font-weight: 700;
   cursor: pointer;
+
+  transition: 0.3s;
 }
 
-/* Hover effect */
 .login-btn:hover {
   background: #eab308;
+  transform: translateY(-2px);
 }
 
-.navbar {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* ================= SIDE MENU ================= */
+
+.side-menu {
+  position: fixed;
+
+  top: 70px;
+  left: -260px;
+
+  width: 250px;
+  height: calc(100vh - 70px);
+
+  background: #0f172a;
+
+  transition: 0.4s ease;
+
+  z-index: 999;
 }
 
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu a {
+  display: block;
+
+  padding: 18px 25px;
+
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.side-menu a:hover {
+  background: #1e293b;
+}
+
+/* ================= TOAST ================= */
 
 .toast {
   position: fixed;
+
   bottom: 30px;
   left: 50%;
+
   transform: translateX(-50%);
 
   padding: 14px 24px;
@@ -116,17 +187,15 @@
 
   z-index: 9999;
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
   animation: slideUpFade 0.3s ease;
 }
 
 .success {
-  background-color: #28a745;
+  background: #28a745;
 }
 
 .error {
-  background-color: #dc3545;
+  background: #dc3545;
 }
 
 @keyframes slideUpFade {
@@ -141,48 +210,34 @@
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 0 10px;
-  }
+/* ================= LOGIN POPUP ================= */
 
-  .logo {
-    font-size: 16px;
-  }
-}
-
-/* ===================== LOGIN POPUP (ADD THIS BELOW) ===================== */
-
-/* 🔥 Overlay background */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+
   background: rgba(0, 0, 0, 0.6);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  animation: overlayFade 0.3s ease;
   z-index: 9998;
+
+  animation: overlayFade 0.3s ease;
 }
 
-/* 🔥 Popup container (Amazon style) */
 .popup-container {
   background: white;
-  padding: 30px;
-  width: 350px;
-  border-radius: 12px;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 350px;
+  padding: 30px;
+
+  border-radius: 12px;
 
   animation: popupZoom 0.3s ease;
 }
 
-/* 🔥 Smooth overlay fade */
 @keyframes overlayFade {
   from {
     opacity: 0;
@@ -193,21 +248,19 @@
   }
 }
 
-/* 🔥 Smooth popup animation */
 @keyframes popupZoom {
   from {
     opacity: 0;
-    transform: scale(0.8) translateY(30px);
+    transform: scale(0.8);
   }
 
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
-
-
+/* ================= PRODUCT GRID ================= */
 
 .grid {
   display: grid;
@@ -227,8 +280,64 @@ img {
   object-fit: cover;
 }
 
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
+
+  .navbar {
+    height: 60px;
+    padding: 0 12px;
+  }
+
+  .menu-btn {
+    font-size: 26px;
+  }
+
+  .logo {
+    font-size: 16px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .login-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .side-menu {
+    width: 220px;
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+
+  .logo {
+    font-size: 14px;
+    max-width: 100px;
+  }
+
+  .login-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .menu-btn {
+    font-size: 24px;
+  }
+
+  .side-menu {
+    width: 200px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
