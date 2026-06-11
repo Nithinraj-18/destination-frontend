@@ -122,16 +122,107 @@
 
       <select [(ngModel)]="order.district" name="district">
         <option value="" disabled>Select District</option>
-         <option value="Davanagere">Davanagere</option>
+        <option value="Davanagere">Davanagere</option>
       </select>
 
       <select [(ngModel)]="order.taluk" name="taluk">
         <option value="" disabled>Select Taluk</option>
-         <option value="Davanagere">Davanagere</option>
-          <option value="Davanagere">Harihar</option>
-           <option value="Davanagere">Channagiri</option>
-            <option value="Davanagere">Jagalur</option>
+        <option value="Davanagere">Davanagere</option>
+        <option value="Davanagere">Harihar</option>
+        <option value="Davanagere">Channagiri</option>
+        <option value="Davanagere">Jagalur</option>
       </select>
+
+
+      <h4>Payment Mode</h4>
+
+      <div class="payment-container">
+
+        <!-- Cash On Delivery -->
+        <div class="payment-row">
+          <input type="radio" id="cod" name="paymentMode" [(ngModel)]="order.paymentMode" value="COD">
+
+          <label for="cod">Cash On Delivery</label>
+        </div>
+
+        <!-- Online Payment -->
+        <div class="payment-row">
+          <input type="radio" id="online" name="paymentMode" [(ngModel)]="order.paymentMode" value="ONLINE">
+
+          <label for="online">Online Payment</label>
+        </div>
+
+      </div>
+
+      <!-- Show only for Online Payment
+      <div *ngIf="order.paymentMode === 'ONLINE'" class="online-payment-section">
+
+        <p><strong><span style="color: orange;">Only PhonePe Allowed :</span></strong> 9964708442 (CHINMAY K B)</p>
+
+        <div class="payment-confirm">
+          <input type="checkbox" id="paymentConfirmation" [(ngModel)]="order.paymentConfirmation">
+
+          <label for="paymentConfirmation">
+            I confirm that I have paid via PhonePe and uploaded the payment transaction screenshot below.
+          </label>
+        </div>
+
+        <input  type="file" accept="image/*" (change)="onImageUpload($event)">
+      </div> -->
+
+
+      <!-- Online Payment Section -->
+      <div *ngIf="order.paymentMode === 'ONLINE'" class="online-payment-section">
+
+        <h4>Select Payment App</h4>
+
+        <div class="payment-row">
+          <input type="radio" id="gpay" name="paymentApp" [(ngModel)]="order.paymentApp" value="GPAY">
+          <label for="gpay">Google Pay</label>
+        </div>
+
+        <div class="payment-row">
+          <input type="radio" id="phonepe" name="paymentApp" [(ngModel)]="order.paymentApp" value="PHONEPE">
+          <label for="phonepe">PhonePe</label>
+        </div>
+
+        <!-- GPay Details -->
+        <!-- GPay Details -->
+        <div *ngIf="order.paymentApp === 'GPAY'">
+
+          <p>
+            <strong style="color: orange;">Google Pay Number:</strong>
+            9964708442 (CHINMAY K B)
+          </p>
+
+          <p>
+            After successful payment, please send the payment screenshot to WhatsApp:
+            <strong>9964708442</strong>
+          </p>
+        </div>
+
+        <!-- PhonePe Details -->
+        <div *ngIf="order.paymentApp === 'PHONEPE'">
+
+          <p>
+            <strong style="color: orange;">
+              PhonePe Number:
+            </strong>
+            9964708442 (CHINMAY K B)
+          </p>
+
+          <div class="payment-confirm">
+            <input type="checkbox" [(ngModel)]="order.paymentConfirmation">
+
+            <label>
+              I confirm that I have paid via PhonePe and uploaded the screenshot below.
+            </label>
+          </div>
+
+          <input type="file" accept="image/*" (change)="onImageUpload($event)">
+        </div>
+
+      </div>
 
       <div class="popup-actions">
         <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>

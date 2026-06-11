@@ -158,12 +158,14 @@ button {
 
 /* 🔥 POPUP BOX */
 .popup {
-  background: white;
   padding: 20px;
   border-radius: 10px;
   width: 400px;
   max-width: 90%;
   background: #5c3931;
+
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .popup.small {
@@ -463,3 +465,48 @@ select option {
   background: #fff;
 }
 
+
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.payment-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-row input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.payment-row label {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.online-payment-section {
+  margin-top: 15px;
+}
+
+.payment-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.payment-confirm input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.payment-confirm label {
+  margin: 0;
+  cursor: pointer;
+}

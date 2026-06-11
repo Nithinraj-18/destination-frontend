@@ -10,6 +10,7 @@
         <th>Ordered Date</th>
         <th>Status</th>
         <th>Items</th>
+        <th>PaymentMode</th>
         <th>Person Name</th>
         <th>Person Details</th>
         <th>Action</th>
@@ -31,6 +32,17 @@
 
         <td>
           <button (click)="openItems(order)">View</button>
+        </td>
+
+        <td>
+          <span *ngIf="order.items[0]?.paymentMode === 'COD'">
+            Cash On Delivery
+          </span>
+
+          <button *ngIf="order.items[0]?.paymentMode === 'ONLINE'" class="payment-btn"
+            (click)="openPaymentProof(order)">
+            Online Payment
+          </button>
         </td>
 
         <td>{{ order.userDetails?.name }}</td>
@@ -139,6 +151,46 @@
     <!-- 🔥 TOAST MESSAGE (BOTTOM CENTER) -->
     <div *ngIf="showMsg" class="toast">
       {{ message }}
+    </div>
+
+  </div>
+  <!-- PAYMENT SCREENSHOT POPUP -->
+  <div class="popup-overlay" *ngIf="showPaymentPopup">
+
+    <div class="payment-popup">
+
+      <h3>Transaction Details</h3>
+
+      <!-- ✅ PHONEPE CASE -->
+      <div *ngIf="isPhonePe; else gpayBlock">
+
+        <p style="color: green;">
+          <strong>PhonePe Payment</strong>
+        </p>
+
+        <img [src]="selectedPaymentImage" alt="Payment Screenshot" class="payment-image">
+
+      </div>
+
+      <!-- 🟠 GPAY CASE -->
+      <ng-template #gpayBlock>
+        <pre style="color: orange;">
+
+
+     Google Pay Payment - Please
+    check once before delivering the order.
+
+
+        </pre>
+
+        <p>No screenshot uploaded by user.</p>
+
+      </ng-template>
+
+      <button class="close-btn" (click)="closePaymentPopup()">
+        Close
+      </button>
+
     </div>
 
   </div>

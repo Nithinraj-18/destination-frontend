@@ -23,8 +23,11 @@ export class Orders implements OnInit {
   // 🔥 Toast message
   message: string = '';
   showMsg: boolean = false;
-
+  showPaymentPopup = false;
+  selectedPaymentImage = '';
   private hasLoaded = false;
+  selectedOrder: any;
+  isPhonePe: boolean = false;
 
   constructor(private api: ApiService, private cd: ChangeDetectorRef) { }
 
@@ -45,6 +48,30 @@ export class Orders implements OnInit {
     // ✅ Implement delivery confirmation logic here
     this.DeliveryOrder();
     this.closeDeliveryPopup();
+  }
+  openPaymentProof(order: any): void {
+
+    this.selectedOrder = order;
+    this.showPaymentPopup = true;
+
+    const screenshot = order?.items?.[0]?.paymentScreenshot;
+
+    // ✅ If screenshot exists → PhonePe
+    if (screenshot) {
+      this.selectedPaymentImage = screenshot;
+      this.isPhonePe = true;
+    }
+
+    // ❌ If no screenshot → Google Pay
+    else {
+      this.selectedPaymentImage = '';
+      this.isPhonePe = false;
+    }
+  }
+
+  closePaymentPopup() {
+    this.showPaymentPopup = false;
+    this.selectedPaymentImage = '';
   }
 
   // ✅ Load Orders

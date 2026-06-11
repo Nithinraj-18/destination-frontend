@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CartService } from '../../services/cart';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api';
-import { ChangeDetectorRef } from '@angular/core';
+import { CartService } from '../../services/cart';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +23,8 @@ export class CartComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   isPlacingOrder = false;
-  
+  paymentScreenshot: File | null = null;
+
 
   order: any = {
     name: '',
@@ -35,7 +35,11 @@ export class CartComponent implements OnInit {
     state: '',
     district: '',
     taluk: '',
+    paymentMode: '',
+    paymentConfirmation: false
   };
+
+
 
   constructor(
     private cartService: CartService,
@@ -106,6 +110,16 @@ export class CartComponent implements OnInit {
     this.showOrderPopup = false;
   }
 
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.paymentScreenshot = file;
+    }
+  }
+
+
+
   // ✅ VALIDATION FIXED
   confirmOrder() {
     if (
@@ -116,10 +130,31 @@ export class CartComponent implements OnInit {
       !this.order.pincode?.trim() ||
       !this.order.state?.trim() ||
       !this.order.district?.trim() ||
-      !this.order.taluk?.trim()
+      !this.order.taluk?.trim() ||
+      !this.order.paymentMode?.trim()
     ) {
       this.errorMessage = "All fields are mandatory!";
       return;
+    }
+
+    // Online payment validation
+    if (this.order.paymentMode === 'ONLINE') {
+
+      // Only PhonePe requires screenshot + confirmation
+      if (this.order.paymentApp === 'PHONEPE') {
+
+        if (!this.order.paymentConfirmation) {
+          this.errorMessage = "Please confirm that payment is completed.";
+          return;
+        }
+
+        if (!this.paymentScreenshot) {
+          this.errorMessage = "Please upload payment screenshot.";
+          return;
+        }
+      }
+
+      // GPay / WhatsApp = NO mandatory validation
     }
 
     this.errorMessage = '';
@@ -137,26 +172,55 @@ export class CartComponent implements OnInit {
       pincode: '',
       state: '',
       district: '',
-      taluk: ''
+      taluk: '',
+      paymentMode: '',
+      paymentConfirmation: false
     };
   }
 
   placeOrder() {
 
     this.isPlacingOrder = true;
+    const formData = new FormData();
 
     const payload = {
-      userDetails: this.order,
+      userDetails: {
+        name: this.order.name,
+        email: this.order.email,
+        mobileNumber: this.order.mobileNumber,
+        address: this.order.address,
+        pincode: this.order.pincode,
+        state: this.order.state,
+        district: this.order.district,
+        taluk: this.order.taluk
+      },
+
       items: this.cartItems.map(item => ({
         productId: item.id,
         productName: item.name,
         price: item.price,
         quantity: item.quantity,
-        totalPrice: item.price * item.quantity
+        totalPrice: item.price * item.quantity,
+        paymentMode: this.order.paymentMode
       }))
     };
 
-    this.apiService.createOrder(payload).subscribe({
+    // JSON data
+    formData.append(
+      "request",
+      JSON.stringify(payload)
+    );
+
+    // Screenshot
+    if (this.paymentScreenshot) {
+      formData.append(
+        "file",
+        this.paymentScreenshot,
+        this.paymentScreenshot.name
+      );
+    }
+
+    this.apiService.createOrder(formData).subscribe({
       next: (res: any) => {
 
         // 🔥 1. SET SUCCESS MESSAGE FIRST
