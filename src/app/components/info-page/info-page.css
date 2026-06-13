@@ -1,4 +1,3 @@
-
 /* =========================
    GLOBAL
 ========================= */
@@ -24,31 +23,32 @@ body {
 
 .hero {
     min-height: 100vh;
-    background-image: url("/assets/nuts2.jpg");
+    background-image: url("/assets/nuts1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    animation: bgSlider 15s infinite;
+    animation: bgSlider 25s ease-in-out infinite;
     position: relative;
 }
 
 @keyframes bgSlider {
     0% {
+        background-image: url("/assets/nuts1.jpg");
+    }
+
+    25% {
         background-image: url("/assets/nuts2.jpg");
     }
 
-    33% {
+    50% {
         background-image: url("/assets/nuts3.jpg");
     }
 
-    66% {
+    75% {
         background-image: url("/assets/nuts4.jpg");
     }
-    100% {
-        background-image: url("/assets/nuts8.jpg");
-    }
 
-    120% {
+    100% {
         background-image: url("/assets/nuts9.jpg");
     }
 }
@@ -143,7 +143,7 @@ body {
     background: white;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.10);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .10);
 }
 
 .about-card p {
