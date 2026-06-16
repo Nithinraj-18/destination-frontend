@@ -45,8 +45,45 @@ export class Orders implements OnInit {
   }
 
   confirmDelivery() {
-    // ✅ Implement delivery confirmation logic here
+
+    const selectedOrder =
+      this.orders.find(
+        o => o.orderId === this.selectedOrderId
+      );
+
+    const mobile =
+      selectedOrder
+        ?.userDetails
+        ?.mobileNumber;
+
+    if (mobile) {
+      const msg =
+        `Hello ${selectedOrder.userDetails.name}, 
+
+Thank you for choosing Destination 
+
+We’re happy to let you know that your order has been confirmed successfully and is being prepared with care.
+
+We look forward to serving you again soon 
+
+Thank you and have a wonderful day!
+
+— Team Destination`;
+
+
+      const url =
+        `https://wa.me/91${mobile}?text=${encodeURIComponent(msg)}`;
+
+      // Open immediately from click
+      window.open(
+        url,
+        '_blank'
+      );
+    }
+
+    // Then update delivery
     this.DeliveryOrder();
+
     this.closeDeliveryPopup();
   }
   openPaymentProof(order: any): void {
@@ -171,46 +208,56 @@ export class Orders implements OnInit {
   DeliveryOrder(): void {
 
     if (!this.selectedOrderId) return;
+
     const selectedOrder = this.orders.find(
       o => o.orderId === this.selectedOrderId
     );
+
     const revenue = selectedOrder?.totalPrice || 0;
 
-    this.api.deliverOrder(this.selectedOrderId, revenue).subscribe({
+    this.api.deliverOrder(
+      this.selectedOrderId,
+      revenue
+    ).subscribe({
 
       next: (res: any) => {
 
-        // ✅ update status instantly
-        const index = this.orders.findIndex(
-          o => o.orderId === this.selectedOrderId
-        );
+        // ✅ Update UI
+        const index =
+          this.orders.findIndex(
+            o => o.orderId === this.selectedOrderId
+          );
 
         if (index !== -1) {
 
-          this.orders[index].status = 'DELIVERED';
+          this.orders[index].status =
+            'DELIVERED';
 
-          this.orders = [...this.orders];
+          this.orders =
+            [...this.orders];
         }
 
-        // ✅ close popup
-        this.delavaryPopup = false;
+        this.delavaryPopup =
+          false;
 
-        // ✅ success message
         this.showMessage(
-          res?.message || 'Order marked as delivered!'
+          res?.message ||
+          'Order delivered!'
         );
 
-        // ✅ refresh UI
         this.cd.detectChanges();
 
       },
 
       error: () => {
 
-        this.showMessage('Failed to mark as delivered!');
+        this.showMessage(
+          'Failed!'
+        );
 
       }
 
     });
+
   }
 }
