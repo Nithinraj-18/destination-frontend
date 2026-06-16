@@ -62,15 +62,16 @@ export class Orders implements OnInit {
 
 Thank you for choosing Destination 
 
-We’re happy to let you know that your order has been confirmed successfully and is being prepared with care.
+We’re delighted to let you know that your order has been successfully delivered.
 
-We look forward to serving you again soon 
+We truly appreciate your trust and support.
 Order again here:
 https://destinationworld.vercel.app/
 
-Thank you and have a wonderful day!
+Thank you once again, and have a wonderful day!
 
 — Team Destination`;
+
 
 
       const url =
