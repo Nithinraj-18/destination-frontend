@@ -65,6 +65,8 @@ Thank you for choosing Destination
 We’re happy to let you know that your order has been confirmed successfully and is being prepared with care.
 
 We look forward to serving you again soon 
+Order again here:
+https://destinationworld.vercel.app/
 
 Thank you and have a wonderful day!
 
