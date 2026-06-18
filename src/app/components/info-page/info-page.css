@@ -498,6 +498,10 @@ body {
     text-align: center;
     color: white;
     cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .know-more span {
