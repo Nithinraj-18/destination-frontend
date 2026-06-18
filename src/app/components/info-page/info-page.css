@@ -379,17 +379,20 @@ body {
 
     .title {
         font-size: 30px;
+        margin-top: 150px
     }
 
     .animated-text {
         font-size: 15px;
         line-height: 1.8;
+        margin-top: 20px;
     }
 
     .order-btn {
         width: 200px;
         font-size: 15px;
         padding: 14px;
+        margin-top: 50px;
     }
 
     .about-section {
@@ -437,7 +440,7 @@ body {
 .instruction-section {
     padding: 50px 20px;
     background: #f8fafc;
-    text-align: center; 
+    text-align: center;
 }
 
 .instruction-section h2 {
@@ -465,7 +468,7 @@ body {
     color: #444;
     margin-bottom: 14px;
     font-size: 16px;
-    
+
 }
 
 /* MOBILE */
@@ -487,4 +490,42 @@ body {
         font-size: 14px;
     }
 
+}
+
+
+.know-more {
+    margin-top: 90px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.know-more span {
+    display: block;
+    font-size: 25px;
+    font-weight: 500;
+    color: white;
+}
+
+.arrow {
+    font-size: 50px;
+    animation: blinkArrow 1s infinite;
+    color: white;
+}
+
+@keyframes blinkArrow {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

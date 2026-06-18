@@ -9,4 +9,14 @@ import { RouterLink } from '@angular/router';
 })
 export class InfoPage {
   isMenuOpen = false;
+
+  scrollDown() {
+    const section = document.getElementById('#order');
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  }
 }
