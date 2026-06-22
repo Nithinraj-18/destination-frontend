@@ -4,7 +4,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  color:black;
+  color: black;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Container */
@@ -14,7 +16,9 @@
 }
 
 /* Responsive text */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
 }
 

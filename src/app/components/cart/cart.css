@@ -214,7 +214,7 @@ button {
   background: rgb(31, 196, 31);
   color: white;
   border: none;
-  padding: 10px 70px;
+  padding: 10px 66px;
 }
 
 /* FOOTER ALIGN */
@@ -442,7 +442,8 @@ select:valid {
 
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 10px 6px;
   margin-bottom: 10px;
@@ -509,4 +510,56 @@ select option {
 .payment-confirm label {
   margin: 0;
   cursor: pointer;
+}
+
+/* 🚚 DELIVERY NOTICE */
+.delivery-notice {
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 0;
+  margin: 20px 0;
+}
+
+.notice-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding-left: 100%;
+  animation: moveText 30s linear infinite;
+}
+
+@keyframes moveText {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+
+}
+
+/* MOBILE */
+@media (max-width:768px) {
+  .delivery-notice {
+    width: calc(100% - 20px);
+    margin: 15px auto;
+  }
+
+  .notice-text {
+    font-size: 13px;
+    animation-duration: 30s;
+  }
+
+  .mobile-cart {
+    display: block;
+  }
+
+  .table-container {
+    display: none;
+  }
+
 }
