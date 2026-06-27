@@ -320,6 +320,7 @@ button {
   .custom-footer {
     flex-direction: column;
     text-align: center;
+    margin-top: 152px;
   }
 
 }
@@ -550,8 +551,8 @@ select option {
   }
 
   .notice-text {
-    font-size: 13px;
-    animation-duration: 30s;
+    font-size: 18px;
+    animation-duration: 35s;
   }
 
   .mobile-cart {
