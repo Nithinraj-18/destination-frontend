@@ -14,7 +14,7 @@ export class ApiService {
   // private adminOrderUrl = 'http://localhost:8082/api/admin/orders';
 
 
-  
+
 
   // production URLs
 
@@ -104,11 +104,16 @@ export class ApiService {
     responseType: 'json'
   }
 
-  deleteOrder(orderId: string) {
-    return this.http.delete(`${this.adminOrderUrl}/delete-order?orderId=${orderId}`);
+  deleteMultipleOrders(orderIds: string[]) {
+    return this.http.post(`${this.adminOrderUrl}/delete-orders`, orderIds);
   }
 
   deliverOrder(orderId: string, revenue: number) {
     return this.http.put(`${this.adminOrderUrl}/delivery-order?orderId=${orderId}&revenue=${revenue}`, {});
+  }
+  exportAllOrders() {
+    return this.http.get(`${this.adminOrderUrl}/exportAll`, {
+      responseType: 'blob'
+    });
   }
 }

@@ -241,7 +241,7 @@ button {
   color: #155724;
   padding: 10px;
   margin-bottom: 15px;
-  margin-top: 150px;
+  margin-top: 100px;
   text-align: center;
   border-radius: 5px;
 }
@@ -320,7 +320,7 @@ button {
   .custom-footer {
     flex-direction: column;
     text-align: center;
-    margin-top: 152px;
+    margin-top: 303px;
   }
 
 }

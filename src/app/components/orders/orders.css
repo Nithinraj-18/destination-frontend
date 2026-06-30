@@ -387,4 +387,55 @@ button {
   cursor: pointer;
 }
 
+/* TOP BUTTONS */
+.top-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
 
+/* EXPORT */
+.export-all-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.export-all-btn:hover {
+  transform: scale(1.03);
+}
+
+/* DELETE */
+.delete-all-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-all-btn:hover {
+  transform: scale(1.03);
+}
+
+/* MOBILE */
+@media (max-width:768px) {
+
+  .top-actions {
+    justify-content: right;
+  }
+
+  .export-all-btn,
+  .delete-all-btn {
+    width: 26%;
+  }
+
+}

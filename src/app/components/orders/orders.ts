@@ -12,7 +12,7 @@ import { ApiService } from '../../services/api';
 export class Orders implements OnInit {
 
   orders: any[] = [];
-
+  selectedOrderIds: string[] = [];
   selectedItems: any[] = [];
   selectedUser: any = null;
   showItemsModal = false;
@@ -42,6 +42,27 @@ export class Orders implements OnInit {
 
   closeDeliveryPopup() {
     this.delavaryPopup = false;
+  }
+  toggleSelection(orderId: string, event: any): void {
+
+    if (event.target.checked) {
+      this.selectedOrderIds.push(orderId);
+    } else {
+      this.selectedOrderIds =
+        this.selectedOrderIds.filter(id => id !== orderId);
+    }
+  }
+  isSelected(orderId: string): boolean {
+    return this.selectedOrderIds.includes(orderId);
+  }
+  toggleSelectAll(event: any): void {
+
+    if (event.target.checked) {
+      this.selectedOrderIds =
+        this.orders.map(o => o.orderId);
+    } else {
+      this.selectedOrderIds = [];
+    }
   }
 
   confirmDelivery() {
@@ -164,29 +185,29 @@ Thank you once again, and have a wonderful day!
   }
 
   // 🔥 DELETE (FAST UI UPDATE)
-  deleteOrder(orderId: string): void {
-    if (!orderId) return;
+  // deleteOrder(orderId: string): void {
+  //   if (!orderId) return;
 
-    this.api.deleteOrder(orderId).subscribe({
-      next: (res: any) => {
+  //   this.api.deleteOrder(orderId).subscribe({
+  //     next: (res: any) => {
 
-        // ✅ Show message
-        this.showMessage(res?.message || 'Deleted successfully');
+  //       // ✅ Show message
+  //       this.showMessage(res?.message || 'Deleted successfully');
 
-        // ✅ Fast UI update
-        this.orders = this.orders.filter(o => o.orderId !== orderId);
+  //       // ✅ Fast UI update
+  //       this.orders = this.orders.filter(o => o.orderId !== orderId);
 
-        // ✅ Optional: full page reload (if you REALLY want)
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+  //       // ✅ Optional: full page reload (if you REALLY want)
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 1000);
 
-      },
-      error: () => {
-        this.showMessage('Delete failed!');
-      }
-    });
-  }
+  //     },
+  //     error: () => {
+  //       this.showMessage('Delete failed!');
+  //     }
+  //   });
+  // }
 
   // 🔥 Toast Message (5 sec)
   showMessage(msg: string): void {
@@ -262,5 +283,58 @@ Thank you once again, and have a wonderful day!
 
     });
 
+  }
+
+  exportAllOrders() {
+    this.api.exportAllOrders().subscribe({
+      next: (res: Blob) => {
+
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+
+        a.download = 'orders.xlsx';
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => {
+        this.showMessage('Export failed!');
+      }
+    });
+  }
+
+  deleteSelectedOrders(): void {
+
+    if (this.selectedOrderIds.length === 0) {
+      this.showMessage('Please select at least one order');
+      return;
+    }
+
+    this.api.deleteMultipleOrders(this.selectedOrderIds).subscribe({
+
+      next: (res: any) => {
+
+        this.showMessage(res?.message || 'Orders deleted');
+
+        // UI update
+        this.orders =
+          this.orders.filter(
+            o => !this.selectedOrderIds.includes(o.orderId)
+          );
+
+        this.selectedOrderIds = [];
+
+      },
+
+      error: () => {
+        this.showMessage('Delete failed!');
+      }
+    });
   }
 }

@@ -1,11 +1,27 @@
 <div class="orders-page">
   <h2>Orders</h2>
 
+  <!-- ACTION BUTTONS -->
+  <div class="top-actions">
+
+    <button class="export-all-btn" (click)="exportAllOrders()">
+      Export All
+    </button>
+
+    <button class="delete-all-btn" (click)="deleteSelectedOrders()">
+      Delete All
+    </button>
+
+  </div>
+
   <p *ngIf="orders.length === 0">No Orders Found</p>
 
   <table class="order-table" *ngIf="orders.length > 0">
     <thead>
       <tr>
+        <th>
+          <input type="checkbox" (change)="toggleSelectAll($event)">
+        </th>
         <th>S/No</th>
         <th>Ordered Date</th>
         <th>Status</th>
@@ -19,15 +35,21 @@
 
     <tbody>
       <tr *ngFor="let order of orders; let i = index">
+
+        <!-- ✅ CHECKBOX -->
+        <td>
+          <input type="checkbox" [checked]="isSelected(order.orderId)"
+            (change)="toggleSelection(order.orderId, $event)">
+        </td>
+
         <td>{{ i + 1 }}</td>
         <td>{{ order.createdAt | date:'medium' }}</td>
+
         <td [ngClass]="{
-          'pending-status': order.status === 'PENDING',
-          'completed-status': order.status === 'COMPLETED'
-        }">
-
+      'pending-status': order.status === 'PENDING',
+      'completed-status': order.status === 'COMPLETED'
+    }">
           {{ order.status }}
-
         </td>
 
         <td>
@@ -51,19 +73,15 @@
           <button (click)="openUser(order)">View</button>
         </td>
 
+        <!-- ❌ REMOVE DELETE BUTTON, KEEP ONLY DELIVERY -->
         <td>
           <div class="btn-group">
-
             <button class="delivery-btn" (click)="OpenDelivery(order)">
               Delivered
             </button>
-
-            <button class="delete-btn" (click)="deleteOrder(order.orderId)">
-              Delete
-            </button>
-
           </div>
         </td>
+
       </tr>
     </tbody>
   </table>
